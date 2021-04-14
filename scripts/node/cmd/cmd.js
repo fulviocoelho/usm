@@ -7,7 +7,7 @@ class Cmd{
             try{
                 exec(comando, (err, stdout, stderr) => {
                     if(stdout){
-                        resolve(stdout)
+                        resolve(comando+' - '+stdout)
                     }else if (stderr){
                         reject(stderr)
                     }else if(err){
