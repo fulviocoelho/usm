@@ -25,25 +25,19 @@ module.exports = (root) => {
                 filecall: ''
             }
 
-            await load.tic('Gerando Pacote de Scripts ....', 25)
+            await load.tic('Gerando Pacote de Scripts ....', 50)
 
             if (!fs.existsSync(root+'/usm.scripts.json')){
                 fs.writeFileSync(root+'/usm.scripts.json', JSON.stringify(usmpkg))
             }
             
-            await load.tic('Criando Pasta scripts ....', 25)
+            await load.tic('Criando Pasta scripts ....', 50)
 
             if (!fs.existsSync(root+'/scripts')){
                 fs.mkdirSync(root+'/scripts')
             }
-
-            await load.tic('Criando Pasta node ....', 25)
-
-            if (!fs.existsSync(root+'/scripts/node')){
-                fs.mkdirSync(root+'/scripts/node')
-            }
             
-            await load.tic('Processo Finalizado', 26)
+            await load.endit('Processo Finalizado')
 
             line.log('')
             line.log('Inicialização finalizada com sucesso!!', 'success')

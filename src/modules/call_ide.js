@@ -12,7 +12,7 @@ try{
 }catch(e){
     var Cmd = class Cmd {
         do = () => {
-            return false
+            throw 'Script não encontrado!!'
         }
     }
 }
