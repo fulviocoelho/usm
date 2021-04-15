@@ -1,1 +1,13 @@
-{"scripts":[{"id":"e5be9daf773a44f194a8dfbc091b9046","name":"random","type":"node","path":"/scripts/node/random"},{"id":"f1e9be27cab8325d9be0de6d438e444d","name":"header","type":"vue","path":"/scripts/vue/header"}]}
+{
+    "scripts": [
+    ],
+    "techs": [
+        {
+            "name": "node",
+            "ext": ".js",
+            "path": "/scripts/node/"
+        }
+    ],
+    "ide": "cd -root- && code .",
+    "filecall": "cd -root- && code . -g -file-"
+}

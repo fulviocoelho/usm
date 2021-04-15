@@ -19,7 +19,10 @@ module.exports = (root) => {
             let line = new Logger()
 
             let usmpkg = {
-                scripts: []
+                scripts: [],
+                techs: [],
+                ide: '',
+                filecall: ''
             }
 
             await load.tic('Gerando Pacote de Scripts ....', 25)

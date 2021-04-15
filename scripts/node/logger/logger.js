@@ -27,12 +27,21 @@ class Logger{
     reset = '\u001b[0m'
 
     log = (message, type) => {
-        const logSymbols = require('log-symbols');
         switch(type){
             case 'success' : console.log(this.black, this.statusLog.success.bg, this.statusLog.success.text, this.reset, this.green, message, this.reset); break
             case 'warning' : console.log(this.black, this.statusLog.warning.bg, this.statusLog.warning.text, this.reset, this.yellow, message, this.reset); break
             case 'error' : console.log(this.black, this.statusLog.error.bg, this.statusLog.error.text, this.reset, this.red, message, this.reset); break
             case 'info' : console.log(this.black, this.statusLog.info.bg, this.statusLog.info.text, this.reset, this.blue, message, this.reset); break
+            default : console.log(this.reset, message, this.reset); break 
+        }
+    }
+
+    text = (message, type) => {
+        switch(type){
+            case 'success' : console.log(this.reset, this.green, message, this.reset); break
+            case 'warning' : console.log(this.reset, this.yellow, message, this.reset); break
+            case 'error' : console.log(this.reset, this.red, message, this.reset); break
+            case 'info' : console.log(this.reset, this.blue, message, this.reset); break
             default : console.log(this.reset, message, this.reset); break 
         }
     }

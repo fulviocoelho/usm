@@ -21,11 +21,13 @@ module.exports = async (req) => {
     await checkApp(req.root).then(async () => {
 
         let pkgcontent = {
+            key : "",
             name : "",
             version : "",
+            stable : false,
             author : "",
-            key : "",
-            dependencies : []
+            usmdependencies : [],
+            externaldependencies : []
         }
         
         var getScriptinfo = readline.createInterface({
@@ -50,6 +52,14 @@ module.exports = async (req) => {
 
         await load.init('Iniciando Criação de Script')
 
+        let usmpkg = fs.readFileSync(req.root+'/usm.scripts.json', {encoding:'utf8', flag:'r'});
+        usmpkg = JSON.parse(usmpkg)
+        let scriptech = usmpkg.techs.filter(tech => tech.name === req.type)
+
+        if(scriptech.length == 0){
+            throw 'Technologia solicitada não encontrada!!'
+        }
+
         await load.tic('Criando pasta ....', 25)
     
         let dir = `${req.root}/scripts/${req.type}/${req.name}`;
@@ -60,8 +70,13 @@ module.exports = async (req) => {
 
         await load.tic('Criando script ....', 25)
     
-        let script = `${req.root}/scripts/${req.type}/${req.name}/${req.name}.js`;
-        let scontent = `class ${req.name} { \n\n\n } \n\n module.exports = ${req.name}`
+        let script = `${req.root}/scripts/${req.type}/${req.name}/${req.name}${scriptech[0].ext}`;
+        let scontent = ''
+        let template = `${req.root}/src/templates/${req.type}.template`
+        if (fs.existsSync(template)){
+            scontent = fs.readFileSync(template, {encoding:'utf8', flag:'r'})
+            scontent = scontent.replace(/"name"/ig, req.name)
+        }
     
         if (!fs.existsSync(script)){
             fs.writeFileSync(script, scontent);
@@ -77,9 +92,7 @@ module.exports = async (req) => {
         
         await load.tic('Anexando script a USM ....', 25)
     
-        let usmpkg = fs.readFileSync(req.root+'/usm.scripts.json', {encoding:'utf8', flag:'r'});
-    
-        usmpkg = JSON.parse(usmpkg)
+        //usmpkg = JSON.parse(usmpkg)
         usmpkg.scripts = [...usmpkg.scripts, { 
             id: pkgcontent.key, 
             name: req.name,
