@@ -5,7 +5,9 @@ try{
         log = (msg) => {
             console.log(msg)
         }
-        text = (msg) => log(msg) 
+        text = (msg) => {
+            console.log(msg)
+        }
     }
 }
 
