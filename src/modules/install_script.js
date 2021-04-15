@@ -24,7 +24,7 @@ module.exports = async (req) => {
         let usmpkg = fs.readFileSync(req.root+'/usm.scripts.json', {encoding:'utf8', flag:'r'});
         usmpkg = JSON.parse(usmpkg)
 
-        pkg = usmpkg.scripts.filter(pkg => pkg.name == req.name)
+        let pkg = usmpkg.scripts.filter(pkg => pkg.name == req.name)
         pkg = pkg[0]
 
         await load.tic(`Criando pasta src ....`, 16)

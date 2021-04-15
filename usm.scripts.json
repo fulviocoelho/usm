@@ -1,5 +1,29 @@
 {
     "scripts": [
+        {
+            "id": "4659580b9c81fd5ff279d445a462baa7",
+            "name": "cmd",
+            "type": "node",
+            "path": "/scripts/node/cmd"
+        },
+        {
+            "id": "404d7ec2c0517d056f7e372a3fe2c35c",
+            "name": "loader",
+            "type": "node",
+            "path": "/scripts/node/loader"
+        },
+        {
+            "id": "deaa9d396eb216073d0d43f0d9f3baf6",
+            "name": "logger",
+            "type": "node",
+            "path": "/scripts/node/logger"
+        },
+        {
+            "id": "b39cbd2c56fb171b8f8b386f93b032d1",
+            "name": "validate",
+            "type": "node",
+            "path": "/scripts/node/validate"
+        }
     ],
     "techs": [
         {

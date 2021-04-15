@@ -139,6 +139,12 @@ let h = (call) => {
     line.log('                      -version')
     line.log('                      -usmdependencies')
     line.log('                      -externaldependencies')
+    line.log('usm <list  -l  --l> <technology> <scripts name> "Lista as informações de biblioteca"')
+    line.log('usm <open  -o  --o> <scripts name (optional)> "Abre a ide usando o comando de terminal indicado em usm.scripts.json,')
+    line.log('                                              caso tenha sido informado o script ele deve ser aberto, tambem usando "')
+    line.log('                                              o comando descrito no arquivo de configurações (usm.scripts.json)"')
+    line.log('usm <help -h --h> "Mostra essa mensagem"')
+    line.log('usm init "Cria os arquivos necessarios para que o programa rode (arquivos de ./src não serão criados)"')
     line.log('')
 }
 
