@@ -10,15 +10,9 @@ describe('Modulo de CMD para NodeJS', () => {
 
     it('Executa Comando com Sucesso', async () => {
         let texto = 'executado em console\r\n'
-        let cd = cmd.do(`echo ${texto}`)
-        let retorno = await cd
-            .then((result) => {
-                return result  
-            })
-            .catch((e) => {
-                return e
-            })
-        expect(retorno).toBe(texto)
+        let result = await cmd.do(`echo ${texto}`)
+        expect(result).toBe(texto)
+        
     })
 
     it('Trata Falha de Execução', async () => {

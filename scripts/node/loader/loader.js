@@ -75,7 +75,7 @@ class Loader{
                 await this.progressText(text)
                 resolve()
             }else{
-                console.log(text)
+                //console.log(text)
                 resolve()
             }
             

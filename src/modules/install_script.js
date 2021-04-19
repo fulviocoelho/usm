@@ -53,7 +53,9 @@ module.exports = async (req) => {
 
         await load.tic(`Instalando pacotes de ${pkg.name} ....`, 16)
 
-        await copyFile(`${req.root}${pkg.path}/${pkg.name}.js`, `${process.cwd()}/src/scripts/${pkg.type}/${pkg.name}/${pkg.name}.js`)
+        let tech = usmpkg.techs.filter(tech => tech.name == pkg.type)
+        tech = tech[0]
+        await copyFile(`${req.root}${pkg.path}/${pkg.name}${tech.ext}`, `${process.cwd()}/src/scripts/${pkg.type}/${pkg.name}/${pkg.name}${tech.ext}`)
         await copyFile(`${req.root}${pkg.path}/${pkg.name}.pkg.json`, `${process.cwd()}/src/scripts/${pkg.type}/${pkg.name}/${pkg.name}.pkg.json`)
         
         await load.tic(`Instalação de ${pkg.name} finalizada`, 5)
