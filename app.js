@@ -121,9 +121,12 @@ let l = () => {
 
 let o = () => {
     let req
+    let pkg
+    process.argv[3] !== undefined && process.argv[3] !== null ? pkg = process.argv[3].split(':') : pkg = [undefined, undefined]
     try{
         req = {
-            pkg: process.argv[3],
+            pkg: pkg[0],
+            tech: pkg[1],
             root: __dirname
         }
     }catch(e){
@@ -139,15 +142,15 @@ let h = (call) => {
     line.log('Os seguintes comandos estão disponiveis nesta versão do sistema: ', 'info')
     line.log('')
     line.log('usm <add  -a  --a> <scripts type (node/vue/react)> <techs extension (.js/.vue/.ts)> "Adiciona um tipo de script a sua biblioteca"')
-    line.log('usm <install  -i  --i> <scripts type (node/vue/react)> <scripts name> "Instala um script de sua biblioteca em seu projeto"')
+    line.log('usm <install  -i  --i> <scripts name>:<technology> "Instala um script de sua biblioteca em seu projeto"')
     line.log('usm <create  -c  --c> <scripts type (node/vue/react)> <scripts name> "Cria a base para um novo script em sua biblioteca"')
-    line.log('usm <update  -u  --u> <atribute command> <new value> <scripts name> "Atualiza as informações do script na biblioteca"')
+    line.log('usm <update  -u  --u> <atribute command> <new value> <scripts name>:<technology> "Atualiza as informações do script na biblioteca"')
     line.log('                      -stable')
     line.log('                      -version')
     line.log('                      -usmdependencies')
     line.log('                      -externaldependencies')
-    line.log('usm <list  -l  --l> <technology> <scripts name> "Lista as informações de biblioteca"')
-    line.log('usm <open  -o  --o> <scripts name (optional)> "Abre a ide usando o comando de terminal indicado em usm.scripts.json,')
+    line.log('usm <list  -l  --l> <scripts name or *>:<technology> "Lista as informações de biblioteca"')
+    line.log('usm <open  -o  --o> <scripts name (optional)>:<technology> "Abre a ide usando o comando de terminal indicado em usm.scripts.json,')
     line.log('                                              caso tenha sido informado o script ele deve ser aberto, tambem usando "')
     line.log('                                              o comando descrito no arquivo de configurações (usm.scripts.json)"')
     line.log('usm <help -h --h> "Mostra essa mensagem"')

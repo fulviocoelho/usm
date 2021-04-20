@@ -41,7 +41,15 @@ module.exports = async (req) => {
         try{
             let json = await getJson(`${req.root}/usm.scripts.json`)
             json = JSON.parse(json)
-            let pkg = json.scripts.filter(item => item.name === req.pkg)
+            let pkg
+            if(req.tech !== undefined){
+                pkg = json.scripts.filter(item => item.name === req.pkg && item.type === req.tech)
+            }else{
+                pkg = json.scripts.filter(item => item.name === req.pkg)
+                if(pkg.length > 1){
+                    throw 'Há mais de um script com este nome, defina uma tecnologia para abrir o script correto no editor!!'
+                }
+            }
             let tech = json.techs.filter(item => item.name === pkg[0].type)
             let command = json.filecall.replace(/-root-/ig, req.root)
             command = command.replace(/-file-/ig, `.${pkg[0].path}/${pkg[0].name}${tech[0].ext}`)
