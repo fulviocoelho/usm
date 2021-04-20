@@ -30,15 +30,30 @@ let getJson = async (path) => {
 
 module.exports = async (req) => {
     let line = new Logger()
-    if(req.type !== undefined && req.pkg !== undefined){
-        await getJson(`${req.root}/usm.scripts.json`)
-            .then( async (filecontent) => {
-                let content = JSON.parse(filecontent)
-                content = content.scripts.filter(script => script.name == req.pkg)
-                await getJson(`${req.root}${content[0].path}/${req.pkg}.pkg.json`)
+
+    await getJson(`${req.root}/usm.scripts.json`)
+    .then( async (filecontent) => {
+        let content = JSON.parse(filecontent)
+        if(req.type !== undefined && req.pkg !== undefined){
+            if(req.pkg == '*'){
+                content.scripts = content.scripts.filter(script => script.type == req.type)
+            }else{
+                content.scripts = content.scripts.filter(script => script.name == req.pkg && script.type == req.type)
+            }
+        }else if(req.pkg !== undefined){
+            content.scripts = content.scripts.filter(script => script.name == req.pkg)
+        }
+
+        if(content.scripts.length > 1){
+            line.text(`SCRIPT          TECNOLOGIA         CAMINHO`, 'info')
+            content.scripts.forEach(element => {
+                line.text(`${element.name}          ${element.type}         ${element.path}`, element.stable === 'true' ? 'success' : 'warning')
+            });
+        }else{
+            await getJson(`${req.root}${content.scripts[0].path}/${req.pkg}.pkg.json`)
                     .then((pkgcontent) => {
                         let pkg = JSON.parse(pkgcontent)
-                        let type = pkg.stable === false ? 'warning' : 'success'
+                        let type = pkg.stable === 'false' ? 'warning' : 'success'
                         line.text(``)
                         pkg.stable === false ? line.log(`Informações de ${req.pkg} (Pacote não Estavel): `, type) : line.log(`Informações de ${req.pkg}: `, type)
                         let data = ['key', 'name', 'version', 'stable', 'author', 'usmdependencies', 'externaldependencies']
@@ -53,46 +68,12 @@ module.exports = async (req) => {
                         line.log(e, 'error')
                         line.log(``)
                     })
-            })
-            .catch(e => {
-                line.log(``)
-                line.log(e, 'error')
-                line.log(``)
-            })
-
-    }else if(req.type !== undefined){
-        await getJson(`${req.root}/usm.scripts.json`)
-            .then((filecontent) => {
-                let content = JSON.parse(filecontent)
-                content = content.scripts.filter(script => script.type == req.type)
-                line.text(``)
-                line.log(`Scripts disponiveis para ${req.type} na biblioteca: `, 'info')
-                for(let item of content){
-                    line.text(`             ${item.name}`)
-                }
-                line.text(``)
-            })
-            .catch(e => {
-                line.log(``)
-                line.log(e, 'error')
-                line.log(``)
-            })
-    }else{
-        await getJson(`${req.root}/usm.scripts.json`)
-            .then((filecontent) => {
-                let content = JSON.parse(filecontent)
-                line.text(``)
-                line.log('Techs disponiveis na biblioteca: ', 'info')
-                for(let item of content.techs){
-                    line.text(`             ${item.name}`)
-                }
-                line.text(``)
-            })
-            .catch(e => {
-                line.log(``)
-                line.log(e, 'error')
-                line.log(``)
-            })
-    }
+        }
+    })
+    .catch(e => {
+        line.log(``)
+        line.log(e, 'error')
+        line.log(``)
+    })
 
 }

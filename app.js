@@ -39,16 +39,18 @@ let init = async () => {
 
 let i = () => {
     let req
+    let pkg = process.argv[3].split(':')
     try{
         req = {
-            name: process.argv[3],
+            name: pkg[0],
+            tech: pkg[1],
             root: __dirname
         }
     }catch(e){
         line.log(e, 'error')
     }
     command = true
-    valid.notNull(req) !== true ? h() : install(req)
+    valid.notNull({ name: req.name, root: req.root }) !== true ? h() : install(req)
 }
 
 let c = () => {
@@ -83,26 +85,31 @@ let a = () => {
 
 let u = () => {
     let req
+    let pkg
+    process.argv[5] !== undefined && process.argv[5] !== null ? pkg = process.argv[5].split(':') : pkg = [undefined, undefined]
     try{
         req = {
             command: process.argv[3],
             value: process.argv[4],
-            pkg: process.argv[5],
+            pkg: pkg[0],
+            tech: pkg[1],
             root: __dirname
         }
     }catch(e){
         line.log(e, 'error')
     }
     command = true
-    valid.notNull(req) !== true ? h() : updatepkg(req)
+    valid.notNull({ command: req.command, value: req.value, pkg: req.pkg, root: req.root }) !== true ? h() : updatepkg(req)
 }
 
 let l = () => {
     let req
+    let pkg
+    process.argv[3] !== undefined && process.argv[3] !== null ? pkg = process.argv[3].split(':') : pkg = [undefined, undefined]
     try{
         req = {
-            type: process.argv[3],
-            pkg: process.argv[4],
+            type: pkg[1],
+            pkg: pkg[0],
             root: __dirname
         }
     }catch(e){

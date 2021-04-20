@@ -97,6 +97,7 @@ module.exports = async (req) => {
             id: pkgcontent.key, 
             name: req.name,
             type: req.type,
+            stable: false,
             path: `/scripts/${req.type}/${req.name}`
         }]
     

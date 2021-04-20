@@ -1,1 +1,67 @@
-{"scripts":[{"id":"4659580b9c81fd5ff279d445a462baa7","name":"cmd","type":"node","path":"/scripts/node/cmd"},{"id":"404d7ec2c0517d056f7e372a3fe2c35c","name":"loader","type":"node","path":"/scripts/node/loader"},{"id":"deaa9d396eb216073d0d43f0d9f3baf6","name":"logger","type":"node","path":"/scripts/node/logger"},{"id":"b39cbd2c56fb171b8f8b386f93b032d1","name":"validate","type":"node","path":"/scripts/node/validate"},{"id":"b4947fd1c2d2654a22642d74137a948a","name":"random","type":"node","path":"/scripts/node/random"},{"id":"1f6980260ff27a3c61de111c73a19f09","name":"cartao-relatorios","type":"vue","path":"/scripts/vue/cartao-relatorios"},{"id":"e01a1cfc0f3115a17625c74c17c4d61f","name":"sleep","type":"node","path":"/scripts/node/sleep"}],"techs":[{"name":"node","ext":".js","path":"/scripts/node/"},{"name":"vue","ext":".vue","path":"/scripts/vue/"}],"ide":"cd -root- && code .","filecall":"cd -root- && code . -g -file-"}
+{
+    "scripts": [
+        {
+            "id": "4659580b9c81fd5ff279d445a462baa7",
+            "name": "cmd",
+            "type": "node",
+            "path": "/scripts/node/cmd",
+            "stable": "true"
+        },
+        {
+            "id": "404d7ec2c0517d056f7e372a3fe2c35c",
+            "name": "loader",
+            "type": "node",
+            "path": "/scripts/node/loader",
+            "stable": "true"
+        },
+        {
+            "id": "deaa9d396eb216073d0d43f0d9f3baf6",
+            "name": "logger",
+            "type": "node",
+            "path": "/scripts/node/logger",
+            "stable": "true"
+        },
+        {
+            "id": "b39cbd2c56fb171b8f8b386f93b032d1",
+            "name": "validate",
+            "type": "node",
+            "path": "/scripts/node/validate",
+            "stable": "true"
+        },
+        {
+            "id": "b4947fd1c2d2654a22642d74137a948a",
+            "name": "random",
+            "type": "node",
+            "path": "/scripts/node/random",
+            "stable": "true"
+        },
+        {
+            "id": "1f6980260ff27a3c61de111c73a19f09",
+            "name": "cartao-relatorios",
+            "type": "vue",
+            "path": "/scripts/vue/cartao-relatorios",
+            "stable": "false"
+        },
+        {
+            "id": "e01a1cfc0f3115a17625c74c17c4d61f",
+            "name": "sleep",
+            "type": "node",
+            "path": "/scripts/node/sleep",
+            "stable": "true"
+        }
+    ],
+    "techs": [
+        {
+            "name": "node",
+            "ext": ".js",
+            "path": "/scripts/node/"
+        },
+        {
+            "name": "vue",
+            "ext": ".vue",
+            "path": "/scripts/vue/"
+        }
+    ],
+    "ide": "cd -root- && code .",
+    "filecall": "cd -root- && code . -g -file-"
+}

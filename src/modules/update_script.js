@@ -24,6 +24,17 @@ let stable = async (req) => {
                 .catch(e => {
                     rejects(e)
                 })
+            let usmpkg = fs.readFileSync(req.root+'/usm.scripts.json', {encoding:'utf8', flag:'r'});
+            usmpkg = JSON.parse(usmpkg)
+            usmpkg.scripts[usmpkg.scripts.findIndex(rootpkg => rootpkg.id === bundle.info.key)].stable = req.value
+            let info = usmpkg
+            await setJson({ path: req.root+'/usm.scripts.json', info })
+                .then(() => {
+                    resolve()
+                })
+                .catch(e => {
+                    rejects(e)
+                })
         }catch(e){
             rejects(e)
         }
@@ -89,12 +100,20 @@ let getJson = async (req) => {
         try{
             let usmpkg = fs.readFileSync(req.root+'/usm.scripts.json', {encoding:'utf8', flag:'r'});
             usmpkg = JSON.parse(usmpkg)
-            let scripjson = usmpkg.scripts.filter(code => code.name === req.pkg)
-    
-            if(scripjson.length == 0){
+            let scripjson
+            
+            if(req.tech !== undefined){
+                scripjson = usmpkg.scripts.filter(code => code.name === req.pkg && code.type === req.tech)
+            }else{
+                scripjson = usmpkg.scripts.filter(code => code.name === req.pkg)
+            }
+
+            if(scripjson.length > 1){
+                throw 'Há mais de um script com esse nome, verifique na listagem da biblioteca as tecnologias de cada um deles e especifique no comando'
+            }else if(scripjson.length == 0){
                 throw 'Pacote solicitado não encontrado!!'
             }
-    
+
             let pkg = `${req.root}${scripjson[0].path}/${req.pkg}.pkg.json`;
             
             if (fs.existsSync(pkg)){
